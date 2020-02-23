@@ -1,0 +1,6 @@
+{
+  "out": "docs",
+  "inputFiles": "./src",
+  "mode": "modules",
+  "theme": "minimal"
+}

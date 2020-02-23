@@ -1,0 +1,42 @@
+{
+    "folders": [
+      {
+        "path": "."
+      }
+    ],
+    "settings": {
+      "files.trimTrailingWhitespace": true,
+      "files.trimFinalNewlines": true,
+      "editor.tabSize": 2,
+      "editor.rulers": [
+        120
+      ],
+      "eslint.alwaysShowStatus": true,
+      "diffEditor.ignoreTrimWhitespace": true,
+      "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "javascript.updateImportsOnFileMove.enabled": "always",
+      "json.format.enable": true,
+      "typescript.tsdk": "node_modules/typescript/lib",
+      "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": false
+      },
+    },
+    "extensions": {
+      "recommendations": [
+        "dbaeumer.vscode-eslint", // Eslint extension
+        "ryanluker.vscode-coverage-gutters", // coverate indicators
+        "EditorConfig.EditorConfig", // official editorconfig ext.
+        "christian-kohler.npm-intellisense", // auto completes import statements for npm
+        "eg2.vscode-npm-script", // smarter package.json file with intellisense
+        "Orta.vscode-jest", // displays test statuses next to the lines for jest
+        "christian-kohler.path-intellisense", // path intellisense for all kind of files
+        "esbenp.prettier-vscode", // Use prettier for formatting.
+      ],
+    },
+  }
