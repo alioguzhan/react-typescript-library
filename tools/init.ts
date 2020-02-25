@@ -280,7 +280,7 @@ if (!which('git')) {
 
 // Say hi!
 console.log(
-  cyan("Hi! You're almost ready to make the next great TypeScript library.")
+  cyan("Hi! You're almost ready to create a React Library with Typescript.")
 );
 
 // Generate the library name and start the tasks
