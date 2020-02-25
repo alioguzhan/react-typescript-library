@@ -129,8 +129,6 @@ public/
 # Ignore all local history of files
 .history
 
-docs/**
-!docs/.gitkeep
-dist/**
-!dist/.gitkeep
+docs/
+dist/
 # End of https://www.gitignore.io/api/node,macos,visualstudiocode

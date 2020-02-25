@@ -82,7 +82,7 @@ function modifyGitignoreFile(): void {
   const files = ['.gitignore'].map(f => resolve(__dirname, '..', f));
   replace({
     files,
-    from: ['dist/**', 'docs/**', '!docs/.gitkeep', '!dist/.gitkeep'],
+    from: ['dist/', 'docs/'],
     to: '',
   });
 }
