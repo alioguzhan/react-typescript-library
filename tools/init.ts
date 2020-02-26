@@ -23,8 +23,8 @@ const { mv, rm, which, exec } = require('shelljs');
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
 const rmFiles = ['.all-contributorsrc', '.gitattributes'];
-const modifyFiles = ['LICENSE', 'package.json'];
-const renameFiles = [];
+const modifyFiles = ['LICENSE', 'package.json', 'example/package.json'];
+const renameFiles: Array<string> = [];
 
 /**
  * Removes items from the project that aren't needed after the initial setup
@@ -280,7 +280,9 @@ if (!which('git')) {
 
 // Say hi!
 console.log(
-  cyan("Hi! You're almost ready to create a React Library with Typescript.")
+  cyan(
+    "Hi! You're almost ready to create the next React Library with Typescript."
+  )
 );
 
 // Generate the library name and start the tasks
