@@ -23,7 +23,7 @@ const { mv, rm, which, exec } = require('shelljs');
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
 const rmFiles = ['.all-contributorsrc', '.gitattributes'];
-const modifyFiles = ['LICENSE', 'package.json'];
+const modifyFiles = ['LICENSE', 'package.json', 'README.md'];
 const renameFiles: Array<string> = [];
 
 /**
@@ -163,11 +163,11 @@ function setupLibrary(libraryName: string, generateExample = false) {
     exec('npx create-react-app example');
     exec('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
   }
+  mv('tools/README.md', 'README.md');
   removeItems();
 
   modifyGitignoreFile();
   modifyContents(libraryName, username, usermail);
-  // renameItems(libraryName);
 
   if (generateExample) {
     console.log(yellow('Linking packages to the example app...'));
@@ -215,14 +215,12 @@ const _promptSchemaLibrarySuggest = {
   properties: {
     useSuggestedName: {
       description: cyan(
-        'Would you like it to be called "' +
-          libraryNameSuggested() +
-          '"? [Yes/No]'
+        'Would you like it to be called "' + libraryNameSuggested() + '"? [y/n]'
       ),
       pattern: /^(y(es)?|n(o)?)$/i,
       type: 'string',
       required: true,
-      message: 'You need to type "Yes" or "No" to continue...',
+      message: 'You need to type "[y]es" or "[n]o" to continue...',
     },
   },
 };
@@ -231,12 +229,12 @@ const _promptInstallExampleApp = {
   properties: {
     installExampleApp: {
       description: yellow(
-        'Would you like to generate an example react app to test your library/component? [Yes/No]'
+        'Would you like to generate an example react app to test your library/component? [y/n]'
       ),
       pattern: /^(y(es)?|n(o)?)$/i,
       type: 'string',
       required: true,
-      message: 'You need to type "Yes" or "No" to continue...',
+      message: 'You need to type "[y]es" or "[n]o" to continue...',
     },
   },
 };
