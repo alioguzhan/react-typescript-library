@@ -23,7 +23,6 @@
     "make:docs": "typedoc",
     "test": "jest --coverage",
     "test:ci": "cross-env CI=1 jest",
-    "prepare": "yarn run build",
     "postinstall": "ts-node tools/init"
 
   },

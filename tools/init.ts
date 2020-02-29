@@ -23,7 +23,7 @@ const { mv, rm, which, exec } = require('shelljs');
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
 const rmFiles = ['.all-contributorsrc', '.gitattributes'];
-const modifyFiles = ['LICENSE', 'package.json', 'example/package.json'];
+const modifyFiles = ['LICENSE', 'package.json'];
 const renameFiles: Array<string> = [];
 
 /**
@@ -60,7 +60,7 @@ function modifyContents(
 
   const files = modifyFiles.map(f => resolve(__dirname, '..', f));
   try {
-    replace({
+    replace.sync({
       files,
       from: [
         /--libraryname--/g,
@@ -74,13 +74,12 @@ function modifyContents(
   } catch (error) {
     console.error('An error occurred modifying the file: ', error);
   }
-
   console.log('\n');
 }
 
 function modifyGitignoreFile(): void {
   const files = ['.gitignore'].map(f => resolve(__dirname, '..', f));
-  replace({
+  replace.sync({
     files,
     from: ['dist/', 'docs/'],
     to: '',
@@ -107,29 +106,6 @@ function renameItems(libraryName: string) {
   });
 
   console.log('\n');
-}
-
-const _promptInstallExampleApp = {
-  properties: {
-    installExampleApp: {
-      description: cyan(
-        'Would you like to generate an example react app to test your library/component?'
-      ),
-      pattern: /^(y(es)?|n(o)?)$/i,
-      type: 'string',
-      required: true,
-      message: 'You need to type "Yes" or "No" to continue...',
-    },
-  },
-};
-function installExampleApp() {
-  _prompt.get(_promptInstallExampleApp, (err: any, res: any) => {
-    if (err) return;
-    if (res.installExampleApp.toLowerCase().charAt(0) === 'y') {
-      exec('npx create-react-app example');
-      exec('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
-    }
-  });
 }
 
 /**
@@ -162,6 +138,8 @@ function finalize() {
   console.log(yellow('Removing yarn.lock and performing a clean install...'));
   rm('yarn.lock');
   exec('yarn install');
+  exec('yarn build');
+  exec("git add . && git commit -am 'chore: init' --no-verify");
   console.log('\n');
 }
 /**
@@ -169,7 +147,7 @@ function finalize() {
  *
  * @param libraryName
  */
-function setupLibrary(libraryName: string) {
+function setupLibrary(libraryName: string, generateExample = false) {
   console.log(
     cyan(
       '\nThanks for the info. The last few changes are being made... hang tight!\n\n'
@@ -180,12 +158,23 @@ function setupLibrary(libraryName: string) {
   const username = exec('git config user.name').stdout.trim();
   const usermail = exec('git config user.email').stdout.trim();
 
+  if (generateExample) {
+    yellow('Installing the test application into example/ directory...');
+    exec('npx create-react-app example');
+    exec('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
+  }
   removeItems();
 
   modifyGitignoreFile();
-  installExampleApp();
   modifyContents(libraryName, username, usermail);
   // renameItems(libraryName);
+
+  if (generateExample) {
+    console.log(yellow('Linking packages to the example app...'));
+    exec(
+      'cd example && yarn add link:.. link:../node_modules/react link:../node_modules/react-dom && cd ..'
+    );
+  }
 
   finalize();
 
@@ -237,6 +226,21 @@ const _promptSchemaLibrarySuggest = {
     },
   },
 };
+
+const _promptInstallExampleApp = {
+  properties: {
+    installExampleApp: {
+      description: yellow(
+        'Would you like to generate an example react app to test your library/component? [Yes/No]'
+      ),
+      pattern: /^(y(es)?|n(o)?)$/i,
+      type: 'string',
+      required: true,
+      message: 'You need to type "Yes" or "No" to continue...',
+    },
+  },
+};
+
 /**
  * Asks the user for the name of the library if it has been cloned into the
  * default directory, or if they want a different name to the one suggested
@@ -249,8 +253,14 @@ function libraryNameCreate() {
       process.exit(1);
       return;
     }
-
-    setupLibrary(res.library);
+    _prompt.get(_promptInstallExampleApp, (err: any, res: any) => {
+      let installExampleApp = false;
+      if (err) return;
+      if (res.installExampleApp.toLowerCase().charAt(0) === 'y') {
+        installExampleApp = true;
+      }
+      setupLibrary(res.library, installExampleApp);
+    });
   });
 }
 
@@ -266,7 +276,14 @@ function libraryNameSuggestedAccept() {
     }
 
     if (res.useSuggestedName.toLowerCase().charAt(0) === 'y') {
-      setupLibrary(libraryNameSuggested());
+      _prompt.get(_promptInstallExampleApp, (err: any, res: any) => {
+        let installExampleApp = false;
+        if (err) return;
+        if (res.installExampleApp.toLowerCase().charAt(0) === 'y') {
+          installExampleApp = true;
+        }
+        setupLibrary(libraryNameSuggested(), installExampleApp);
+      });
     } else {
       libraryNameCreate();
     }
