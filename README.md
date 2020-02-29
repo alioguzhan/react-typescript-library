@@ -1,5 +1,7 @@
 # react-typescript-library-template
 
+A started template to create a react component / library with Typescript.
+
 ## Install
 
 ### Github Users
@@ -20,12 +22,7 @@ Install the deps:
 yarn install
 ```
 
-If you want to change or remove some parts of this template, do it before start development.
-Once you feel ready, remove the `.git` folder and start a new one:
-
-```
-rm -rf .git && git init
-```
+Once the installation is completed, A prompt will welcome you. Answer those questions and the installer will bootstrap the environment for you.
 
 > You can check if there are any outdated package with [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) tool.
 
