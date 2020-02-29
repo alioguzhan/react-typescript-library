@@ -1,4 +1,4 @@
-# react-typescript-library-template
+# React Typescript Library Template
 
 A template to create a react component / library with Typescript.
 
