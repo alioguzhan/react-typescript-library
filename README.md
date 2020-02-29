@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./tools/tsreact.png" width="500" height="300" alt="react loves typescript">
+  <img src="./tools/tsreact.png" width="500" alt="react loves typescript">
 </div>
 
 # React Typescript Library Template
@@ -86,3 +86,7 @@ yarn test
 This template uses [TypeDoc](https://typedoc.org/) by default.
 
 Run `yarn make:docs` and a folder named `docs` will be created in your root directory. Just open `index.html` in your browser to see if your like it or not.
+
+## CREDITS
+
+- Logo Design by [@fyunusyildiz](https://github.com/fyunusyildiz)
