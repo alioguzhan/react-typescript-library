@@ -2,5 +2,8 @@
   "out": "docs",
   "inputFiles": "./src",
   "mode": "modules",
-  "theme": "minimal"
+  "theme": "default",
+  "excludeNotExported": true,
+  "includeVersion": true,
+  "categorizeByGroup": true
 }
