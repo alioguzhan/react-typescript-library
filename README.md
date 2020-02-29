@@ -1,6 +1,6 @@
 # react-typescript-library-template
 
-A started template to create a react component / library with Typescript.
+A template to create a react component / library with Typescript.
 
 ## Install
 
