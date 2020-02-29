@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./tools/tsreact.png" width="500" height="300" alt="react loves typescript">
+</div>
+
 # React Typescript Library Template
 
 A template to create a react component / library with Typescript.
