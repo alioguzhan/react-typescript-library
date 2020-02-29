@@ -109,6 +109,29 @@ function renameItems(libraryName: string) {
   console.log('\n');
 }
 
+const _promptInstallExampleApp = {
+  properties: {
+    installExampleApp: {
+      description: cyan(
+        'Would you like to generate an example react app to test your library/component?'
+      ),
+      pattern: /^(y(es)?|n(o)?)$/i,
+      type: 'string',
+      required: true,
+      message: 'You need to type "Yes" or "No" to continue...',
+    },
+  },
+};
+function installExampleApp() {
+  _prompt.get(_promptInstallExampleApp, (err: any, res: any) => {
+    if (err) return;
+    if (res.installExampleApp.toLowerCase().charAt(0) === 'y') {
+      exec('npx create-react-app example');
+      exec('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
+    }
+  });
+}
+
 /**
  * Calls any external programs to finish setting up the library
  */
@@ -136,14 +159,9 @@ function finalize() {
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
   console.log(green('Postinstall script has been removed'));
 
-  // Initialize Husky
-  fork(
-    resolve(__dirname, '..', 'node_modules', 'husky', 'bin', 'install'),
-    [],
-    { silent: true }
-  );
-  console.log(green('Git hooks set up'));
-
+  console.log(yellow('Removing yarn.lock and performing a clean install...'));
+  rm('yarn.lock');
+  exec('yarn install');
   console.log('\n');
 }
 /**
@@ -165,6 +183,7 @@ function setupLibrary(libraryName: string) {
   removeItems();
 
   modifyGitignoreFile();
+  installExampleApp();
   modifyContents(libraryName, username, usermail);
   // renameItems(libraryName);
 
