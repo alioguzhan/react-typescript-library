@@ -19,16 +19,10 @@ A template to create a react component / library with Typescript.
 
 ## Install
 
-### Github Users
-
-Since this is a `template repository`, you can use that green `Use this template` button to start a new repository from this template.
-
-### Non-Github Users
-
 Clone the repository:
 
 ```
-git clone --depth 1 git@github.com:alioguzhan/react-typescript-library-template.git
+git clone --depth 1 git@github.com:alioguzhan/react-typescript-library.git
 ```
 
 Install the deps:
