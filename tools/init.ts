@@ -28,7 +28,6 @@ const modifyFiles = [
   'package.json',
   'README.md',
   'CODE_OF_CONDUCT.md',
-  'CONTRIBUTING.md',
 ];
 const renameFiles: Array<string> = [];
 
