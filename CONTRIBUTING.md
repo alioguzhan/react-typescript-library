@@ -1,9 +1,9 @@
-Hey there,
+Hi dear contributor,
 
-Any kind of contribution are welcome. First create an issue that addresses the problem / feature.
+Any kind of contribution is welcome. First, create an issue that addresses the problem/feature.
 
 Then, go and create a Pull Request implements/fixes that issue.
 
-Do not forget the reference the issue, please.
+Do not forget to reference the issue, please.
 
 Thanks

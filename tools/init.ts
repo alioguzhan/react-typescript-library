@@ -23,7 +23,13 @@ const { mv, rm, which, exec } = require('shelljs');
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
 const rmFiles = ['.all-contributorsrc', '.gitattributes'];
-const modifyFiles = ['LICENSE', 'package.json', 'README.md'];
+const modifyFiles = [
+  'LICENSE',
+  'package.json',
+  'README.md',
+  'CODE_OF_CONDUCT.md',
+  'CONTRIBUTING.md',
+];
 const renameFiles: Array<string> = [];
 
 /**

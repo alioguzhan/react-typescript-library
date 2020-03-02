@@ -4,6 +4,8 @@
 [![npm](https://img.shields.io/npm/dm/--libraryname--.svg)](https://www.npmjs.com/package/--libraryname--)
 ![GitHub](https://img.shields.io/github/license/--username--/--libraryname--)
 
+This project is generated from [react-typescript-library template](https://github.com/alioguzhan/react-typescript-library).
+
 ## Install
 
 ```bash
