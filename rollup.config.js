@@ -14,11 +14,21 @@ export default {
       file: pkg.main,
       format: 'cjs',
       sourcemap: true,
+      plugins: [terser()],
+      exports: 'auto',
     },
     {
       file: pkg.module,
       format: 'es',
       sourcemap: true,
+      plugins: [terser()],
+      exports: 'auto',
+    },
+    {
+      file: 'dist/index.js',
+      format: 'cjs',
+      sourcemap: true,
+      exports: 'auto',
     },
   ],
   watch: {
@@ -43,6 +53,5 @@ export default {
     commonjs(),
     // Resolve source maps to the original source
     sourceMaps(),
-    terser({ include: [/^.+\.min\.js$/, '*.es.*'] }),
   ],
 };
