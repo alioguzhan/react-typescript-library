@@ -23,7 +23,6 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -31,5 +30,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react/react-in-jsx-scope': 'off', // suppress errors for missing 'import React' in files
   },
 };

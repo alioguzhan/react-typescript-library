@@ -16,7 +16,6 @@ const { basename, resolve } = require('path');
 const replace = require('replace-in-file');
 const { readFileSync, writeFileSync } = require('fs');
 const { cyan, green, red, underline, yellow } = require('colors');
-const { fork } = require('child_process');
 const _prompt = require('prompt');
 const { mv, rm, which, exec } = require('shelljs');
 
@@ -29,7 +28,6 @@ const modifyFiles = [
   'README.md',
   'CODE_OF_CONDUCT.md',
 ];
-const renameFiles: Array<string> = [];
 
 /**
  * Removes items from the project that aren't needed after the initial setup
@@ -89,28 +87,6 @@ function modifyGitignoreFile(): void {
     from: ['dist/', 'docs/'],
     to: '',
   });
-}
-
-/**
- * Renames any template files to the new library name
- *
- * @param libraryName
- */
-function renameItems(libraryName: string) {
-  console.log(underline.white('Renamed'));
-
-  renameFiles.forEach(function (files) {
-    // Files[0] is the current filename
-    // Files[1] is the new name
-    const newFilename = files[1].replace(/--libraryname--/g, libraryName);
-    mv(
-      resolve(__dirname, '..', files[0]),
-      resolve(__dirname, '..', newFilename)
-    );
-    console.log(cyan(files[0] + ' => ' + newFilename));
-  });
-
-  console.log('\n');
 }
 
 /**
