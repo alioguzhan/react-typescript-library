@@ -25,9 +25,16 @@ Clone the repository:
 git clone --depth 1 git@github.com:alioguzhan/react-typescript-library.git
 ```
 
+Rename the cloned folder to your library/component name:
+
+```
+mv react-typescript-library my-react-lib
+```
+
 Install the deps:
 
 ```bash
+cd my-react-lib
 yarn install
 ```
 
