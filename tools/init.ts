@@ -6,7 +6,7 @@
  * This file is taken from https://github.com/alexjoverm/typescript-library-starter and
  * is almost identical to https://github.com/alexjoverm/typescript-library-starter/blob/master/tools/init.ts
  *
- * I just made some modifications added some new functions.
+ * I just made some modifications and added some new functions.
  * **/
 
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -42,7 +42,7 @@ function removeItems() {
   const rmItems = rmDirs.concat(rmFiles);
   rm(
     '-rf',
-    rmItems.map(f => resolve(__dirname, '..', f))
+    rmItems.map((f) => resolve(__dirname, '..', f))
   );
   console.log(red(rmItems.join('\n')));
 
@@ -63,7 +63,7 @@ function modifyContents(
 ) {
   console.log(underline.white('Modified'));
 
-  const files = modifyFiles.map(f => resolve(__dirname, '..', f));
+  const files = modifyFiles.map((f) => resolve(__dirname, '..', f));
   try {
     replace.sync({
       files,
@@ -83,7 +83,7 @@ function modifyContents(
 }
 
 function modifyGitignoreFile(): void {
-  const files = ['.gitignore'].map(f => resolve(__dirname, '..', f));
+  const files = ['.gitignore'].map((f) => resolve(__dirname, '..', f));
   replace.sync({
     files,
     from: ['dist/', 'docs/'],
@@ -99,7 +99,7 @@ function modifyGitignoreFile(): void {
 function renameItems(libraryName: string) {
   console.log(underline.white('Renamed'));
 
-  renameFiles.forEach(function(files) {
+  renameFiles.forEach(function (files) {
     // Files[0] is the current filename
     // Files[1] is the new name
     const newFilename = files[1].replace(/--libraryname--/g, libraryName);
@@ -133,9 +133,11 @@ function finalize() {
   delete pkg.scripts.postinstall;
 
   // remove the dependencies that are required for the bootstrapping.
-  ['colors', 'prompt', 'replace-in-file', 'shelljs', 'ts-node'].forEach(dep => {
-    delete pkg.devDependencies[dep];
-  });
+  ['colors', 'prompt', 'replace-in-file', 'shelljs', 'ts-node'].forEach(
+    (dep) => {
+      delete pkg.devDependencies[dep];
+    }
+  );
 
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
   console.log(green('Postinstall script has been removed'));
