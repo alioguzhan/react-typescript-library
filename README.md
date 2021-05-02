@@ -9,6 +9,7 @@ A template to create a react component / library with Typescript.
 - React
 - Typescript
 - Rollup
+- Css Modules
 - Jest with code coverage report
 - `Typedoc` for API documentation
 - `standard-version` ready

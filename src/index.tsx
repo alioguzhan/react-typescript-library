@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import styles from './styles.module.css';
 
 interface Props {
   message?: string;
@@ -11,7 +12,9 @@ function Greeting(props: Props) {
     console.log('Incoming message: ', props.message);
   }, [props.message]);
 
-  return <div>{props.message ?? 'No Message'}</div>;
+  return (
+    <div className={styles.container}>{props.message ?? 'No Message'}</div>
+  );
 }
 
 export default Greeting;

@@ -12,6 +12,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+if (process.env['RTL_SKIP_POSTINSTALL']) {
+  console.log('Skipping post-install process...');
+  process.exit(0);
+}
+
 const { basename, resolve } = require('path');
 const replace = require('replace-in-file');
 const { readFileSync, writeFileSync } = require('fs');
