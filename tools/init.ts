@@ -12,6 +12,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// eslint-disable-next-line dot-notation
 if (process.env['RTL_SKIP_POSTINSTALL']) {
   console.log('Skipping post-install process...');
   process.exit(0);
