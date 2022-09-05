@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 
-interface Props {
+/**
+ * Main Component Props
+ */
+export interface Props {
   message?: string;
 }
 /**
