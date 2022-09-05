@@ -60,6 +60,7 @@ const modifyFiles = [
   'README.md',
   'CODE_OF_CONDUCT.md',
   'shell.nix',
+  '.github/workflows/release-please.yml',
 ];
 
 /**
