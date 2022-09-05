@@ -126,6 +126,7 @@ function finalize() {
 
   console.log(yellow('Removing yarn.lock and performing a clean install...'));
   rm('yarn.lock');
+  rm('-rf', 'node_modules');
   exec('yarn install');
   exec('yarn build');
   exec("git add . && git commit -am 'chore: init' --no-verify");
