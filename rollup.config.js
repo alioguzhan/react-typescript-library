@@ -45,7 +45,6 @@ export default {
     // Compile TypeScript files
     typescript({
       useTsconfigDeclarationDir: true,
-      rollupCommonJSResolveHack: true,
       exclude: ['**/__tests__/**', '*.spec.*', '*.test.*'],
       clean: true,
     }),
