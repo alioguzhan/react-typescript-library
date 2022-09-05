@@ -9,6 +9,16 @@
  * I just made some modifications and added some new functions.
  * **/
 
+const { execSync } = require('child_process');
+const {
+  rmdirSync,
+  rmSync,
+  existsSync,
+  lstatSync,
+  readdirSync,
+  unlinkSync,
+} = require('fs');
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -23,7 +33,23 @@ const replace = require('replace-in-file');
 const { readFileSync, writeFileSync } = require('fs');
 const { cyan, green, red, underline, yellow } = require('colors');
 const _prompt = require('prompt');
-const { mv, rm, which, exec } = require('shelljs');
+
+function deleteFolderRecursive(path: any) {
+  if (existsSync(path)) {
+    const files = readdirSync(path);
+    files.forEach(function (file: any) {
+      const curPath = path + '/' + file;
+      if (lstatSync(curPath).isDirectory()) {
+        // recurse
+        deleteFolderRecursive(curPath);
+      } else {
+        // delete file
+        unlinkSync(curPath);
+      }
+    });
+    rmdirSync(path);
+  }
+}
 
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
@@ -45,12 +71,11 @@ function removeItems() {
   // The directories and files are combined here, to simplify the function,
   // as the 'rm' command checks the item type before attempting to remove it
   const rmItems = rmDirs.concat(rmFiles);
-  rm(
-    '-rf',
-    rmItems.map((f) => resolve(__dirname, '..', f))
-  );
-  console.log(red(rmItems.join('\n')));
 
+  rmItems
+    .map((f) => resolve(__dirname, '..', f))
+    .forEach((p) => deleteFolderRecursive(p));
+  console.log(red(rmItems.join('\n')));
   console.log('\n');
 }
 
@@ -103,9 +128,10 @@ function finalize() {
   console.log(underline.white('Finalizing'));
 
   // Recreate Git folder
-  const gitInitOutput = exec('git init "' + resolve(__dirname, '..') + '"', {
-    silent: true,
-  }).stdout;
+  const gitInitOutput = execSync(
+    'git init "' + resolve(__dirname, '..') + '"',
+    {}
+  ).toString();
   console.log(green(gitInitOutput.replace(/(\n|\r)+/g, '')));
 
   // Remove post-install command
@@ -126,11 +152,11 @@ function finalize() {
   console.log(green('Postinstall script has been removed'));
 
   console.log(yellow('Removing yarn.lock and performing a clean install...'));
-  rm('yarn.lock');
-  rm('-rf', 'node_modules');
-  exec('yarn install');
-  exec('yarn build');
-  exec("git add . && git commit -am 'chore: init' --no-verify");
+  rmSync('yarn.lock');
+  deleteFolderRecursive('node_modules');
+  execSync('yarn install');
+  execSync('yarn build');
+  execSync("git add . && git commit -am 'chore: init' --no-verify");
   console.log('\n');
 }
 /**
@@ -146,15 +172,15 @@ function setupLibrary(libraryName: string, generateExample = false) {
   );
 
   // Get the Git username and email before the .git directory is removed
-  const username = exec('git config user.name').stdout.trim();
-  const usermail = exec('git config user.email').stdout.trim();
+  const username = execSync('git config user.name').toString().trim();
+  const usermail = execSync('git config user.email').toString().trim();
 
   if (generateExample) {
     yellow('Installing the test application into example/ directory...');
-    exec('npx create-react-app example');
-    exec('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
+    execSync('npx create-react-app example');
+    execSync('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
   }
-  mv('tools/README.md', 'README.md');
+  execSync('mv tools/README.md README.md');
   removeItems();
 
   modifyGitignoreFile();
@@ -162,7 +188,7 @@ function setupLibrary(libraryName: string, generateExample = false) {
 
   if (generateExample) {
     console.log(yellow('Linking packages to the example app...'));
-    exec(
+    execSync(
       'cd example && yarn add link:.. link:../node_modules/react link:../node_modules/react-dom && cd ..'
     );
   }
@@ -297,7 +323,9 @@ _prompt.message = '';
 // Clear console
 process.stdout.write('\x1B[2J\x1B[0f');
 
-if (!which('git')) {
+try {
+  execSync('git --version');
+} catch {
   console.log(red('Sorry, this script requires git'));
   removeItems();
   process.exit(1);
