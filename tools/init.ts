@@ -33,6 +33,7 @@ const modifyFiles = [
   'package.json',
   'README.md',
   'CODE_OF_CONDUCT.md',
+  'shell.nix',
 ];
 
 /**
