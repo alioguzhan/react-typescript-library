@@ -142,11 +142,9 @@ function finalize() {
   delete pkg.scripts.postinstall;
 
   // remove the dependencies that are required for the bootstrapping.
-  ['colors', 'prompt', 'replace-in-file', 'shelljs', 'ts-node'].forEach(
-    (dep) => {
-      delete pkg.devDependencies[dep];
-    }
-  );
+  ['colors', 'prompt', 'replace-in-file', 'ts-node'].forEach((dep) => {
+    delete pkg.devDependencies[dep];
+  });
 
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
   console.log(green('Postinstall script has been removed'));
