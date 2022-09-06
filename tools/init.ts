@@ -52,7 +52,7 @@ function deleteFolderRecursive(path: any) {
 }
 
 // Note: These should all be relative to the project root directory
-const rmDirs = ['.git', 'tools'];
+const rmDirs = ['.git', 'tools', 'CHANGELOG.md'];
 const rmFiles = ['.all-contributorsrc', '.gitattributes'];
 const modifyFiles = [
   'LICENSE',
@@ -146,6 +146,8 @@ function finalize() {
   ['colors', 'prompt', 'replace-in-file', 'ts-node'].forEach((dep) => {
     delete pkg.devDependencies[dep];
   });
+  
+  pkg.version = "0.1.0";
 
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
   console.log(green('Postinstall script has been removed'));
