@@ -12,11 +12,11 @@ A template to create a react component / library with Typescript.
 - Css Modules
 - Jest with code coverage report
 - `Typedoc` for API documentation
-- `standard-version` ready
 - `commitlint` for conventional-commits
 - `Prettier` and `ESLint` integration with git hooks
 - Optional `example app` generation for testing
 - `Github Pages` integration
+- Release-Please workflow
 
 ## Install
 
