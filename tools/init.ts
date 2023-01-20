@@ -146,8 +146,8 @@ function finalize() {
   ['colors', 'prompt', 'replace-in-file', 'ts-node'].forEach((dep) => {
     delete pkg.devDependencies[dep];
   });
-  
-  pkg.version = "0.1.0";
+
+  pkg.version = '0.1.0';
 
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
   console.log(green('Postinstall script has been removed'));
@@ -178,7 +178,7 @@ function setupLibrary(libraryName: string, generateExample = false) {
 
   if (generateExample) {
     yellow('Installing the test application into example/ directory...');
-    execSync('npx create-react-app example');
+    execSync('yarn create react-app --template=typescript example');
     execSync('echo "SKIP_PREFLIGHT_CHECK=true" >> example/.env');
   }
   execSync('mv tools/README.md README.md');
