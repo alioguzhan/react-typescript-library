@@ -31,7 +31,7 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "peerDependencies": {
     "react": ">=17",
