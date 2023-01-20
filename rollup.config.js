@@ -1,14 +1,14 @@
-import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
-import resolve from '@rollup/plugin-node-resolve';
-import external from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
-import sourceMaps from 'rollup-plugin-sourcemaps';
-import { terser } from 'rollup-plugin-terser';
-import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json';
+const commonjs = require('@rollup/plugin-commonjs');
+const json = require('@rollup/plugin-json');
+const resolve = require('@rollup/plugin-node-resolve');
+const external = require('rollup-plugin-peer-deps-external');
+const postcss = require('rollup-plugin-postcss');
+const sourceMaps = require('rollup-plugin-sourcemaps');
+const { terser } = require('rollup-plugin-terser');
+const typescript = require('rollup-plugin-typescript2');
+const pkg = require('./package.json');
 
-export default {
+module.exports = {
   input: `src/index.tsx`,
   output: [
     {
