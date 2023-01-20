@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/alioguzhan/react-typescript-library/compare/v1.0.0...v2.0.0) (2023-01-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade node engine minimum version to 14
+
+### Features
+
+* create example app wth typescript template ([6cc5bea](https://github.com/alioguzhan/react-typescript-library/commit/6cc5bea0aa8eb09477ffb7c36dcf06a6b2e0a8e4))
+
+
+### Miscellaneous Chores
+
+* upgrade node engine minimum version to 14 ([2cdeb1e](https://github.com/alioguzhan/react-typescript-library/commit/2cdeb1ec3b902b9dbdf60cbf53b4ca884e90603f))
+
 ## 1.0.0 (2022-09-06)
 
 
