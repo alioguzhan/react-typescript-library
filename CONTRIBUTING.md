@@ -1,3 +1,5 @@
+# CONTRIBUTING
+
 Hi dear contributor,
 
 Any kind of contribution is welcome. First, create an issue that addresses the problem/feature.
