@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/alioguzhan/react-typescript-library/compare/v2.0.0...v3.0.0) (2023-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop React 17 support
+* drop node 14 support
+
+### Miscellaneous Chores
+
+* drop node 14 support ([68852c7](https://github.com/alioguzhan/react-typescript-library/commit/68852c72b946922bfdeb1c79c7f855862da2ab30))
+* drop React 17 support ([c13347a](https://github.com/alioguzhan/react-typescript-library/commit/c13347ac78e5640c6442b782b63afd3f2e998c88))
+
 ## [2.0.0](https://github.com/alioguzhan/react-typescript-library/compare/v1.0.0...v2.0.0) (2023-01-20)
 
 
